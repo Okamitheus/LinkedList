@@ -1,9 +1,9 @@
 /* ***************************************************
- * <your name>
- * <the date>
- * <the file name>
- *
- * <a simple, short program/class description>
+* John Spurgeon
+* 9/27/17
+* List.java
+*
+* Creates a List class that enables the manipulation of an array
  *************************************************** */
 
 // the EasyList class
@@ -13,6 +13,8 @@ class List
 
 	private int end;	// the index of the last valid item in the list
 	private int curr;	// the index of the current item in the list
+
+	//change char to int
 	private int[] list;	// the list
 
 	// constructor
@@ -21,6 +23,8 @@ class List
 	{
 		this.end = -1;
 		this.curr = -1;
+
+		//change char to int
 		this.list = new int[MAX_SIZE];
 	}
 
@@ -30,6 +34,8 @@ class List
 	{
 		this.end = -1;
 		this.curr = -1;
+
+		//change char to int
 		this.list = new int[MAX_SIZE];
 
 		for (int i=0; i<l.GetSize(); i++)
@@ -84,9 +90,12 @@ class List
 	}
 
 	// returns the value of the current element (or -1)
+
+	//change char to int
 	public int GetValue()
 	{
 		if (this.IsEmpty())
+		//change the space char into the -1 that would represent an empty list
 			return -1;
 		else
 			return list[curr];
@@ -102,6 +111,8 @@ class List
 	// inserts an item before the current element
 	// the new element becomes the current
 	// this should not be possible for a full list
+
+	//change char to int
 	public void InsertBefore(int data)
 	{
 		if (!this.IsFull())
@@ -126,6 +137,8 @@ class List
 	// inserts an item after the current element
 	// the new element becomes the current
 	// this should not be possible for a full list
+
+	//change char to int
 	public void InsertAfter(int data)
 	{
 		if (!this.IsFull())
@@ -162,6 +175,8 @@ class List
 
 	// replaces the value of the current element with the specified value
 	// this should not be possible for an empty list
+
+	//change char to int
 	public void Replace(int data)
 	{
 		if (!this.IsEmpty())
