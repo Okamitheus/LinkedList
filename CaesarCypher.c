@@ -4,50 +4,48 @@
 
 int cypher (int inLetter, int K)
 {
-  if (inLetter >= 97 && inLetter <= 122)
-  {
-    if (inLetter + K <= 122)
-    {
-      return inLetter + K;
-    }
-    else
-    {
-      return inLetter + (K - 26);
-    }
-  }
-  else
+  if (inLetter < 97 || inLetter > 122 || K == 26)
   {
     return inLetter;
   }
+    else
+      if (inLetter + K > 122)
+      {
+        return inLetter + (K - 26);
+      }
+      else
+        return inLetter + K;
 }
 
-void cypherP(int inLetter, int outLetter, int K)
+int badDegree()
 {
-  printf ("Enter a (lower case) phrase to be encrypted: ");
-  scanf (%d, phrase[]);
-  int i = 0;
-  for (i=0; i=sizeof(phrase); i++)
+  printf ("Invalid degree, please try again.\n");
+  return scanf("%d");
+}
+
+void cypherPrint (int inLetter, int outLetter, int K, int *esc, char *phrase)
+{
+  printf ("Enter a (lower case) phrase to be encrypted:\n");
+  scanf ("%s", phrase);
+  for (int i=0; i<=strlen(phrase); i++)
   {
     inLetter = phrase[i];
     outLetter = cypher (inLetter, K);
     printf ("%c", outLetter);
   }
-  printf ("\n");
+  printf("\n");
 }
 
-void main(int argc, const char *argv [])
+void main (int argc, const char *argv [])
 {
   int K = atoi (argv[1]);
   int inLetter, outLetter;
-  int[] phrase = new int[];
-  if (K >= 1 && K <= 26)
+  char *phrase = (char*) malloc( 35 );
+  while (K > 26)
   {
-    cypherP();
+    K = badDegree();
   }
-  else
-  {
-    printf ("Invalid degree, please try again.\n");
-    scanf (%d, K);
-    cypherP();
-  }
+  cypherPrint(inLetter, outLetter, K, &esc, phrase);
+  printf("Thank you for using the CaesarCypher!\n");
+  free(phrase);
 }
