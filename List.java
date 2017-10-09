@@ -1,4 +1,4 @@
-//* ***************************************************
+/* ***************************************************
  * John Spurgeon
  * 10/2/17
  * List.java
@@ -99,17 +99,20 @@ class List
 	// returns the location of the current element (or -1)
 	public int GetPos()
 	{
+    return 0;
 	}
 
 	// returns the value of the current element (or -1)
 	public int GetValue()
 	{
+    return 0;
 	}
 
 	// returns the size of the list
 	// size does not imply capacity
 	public int GetSize()
 	{
+    return 0;
 	}
 
 	// inserts an item before the current element
@@ -141,16 +144,19 @@ class List
 	// returns if the list is empty
 	public boolean IsEmpty()
 	{
+    return true;
 	}
 
 	// returns if the list is full
 	public boolean IsFull()
 	{
+    return true;
 	}
 
 	// returns if two lists are equal (by value)
 	public boolean Equals(List l)
 	{
+    return true;
 	}
 
 	// returns the concatenation of two lists
@@ -160,11 +166,13 @@ class List
 	// the last element of the new list is the current
 	public List Add(List l)
 	{
+    return null;
 	}
 
 	// returns a string representation of the entire list (e.g., 1 2 3 4 5)
 	// the string "NULL" should be returned for an empty list
 	public String toString()
 	{
+    return null;
 	}
 }
