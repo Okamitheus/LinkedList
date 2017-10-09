@@ -50,6 +50,7 @@ class List
 	private Node head;
 	private Node tail;
 	private Node curr;
+	private Node temp;
 	private int num_items;
 
 	// constructor
@@ -67,12 +68,14 @@ class List
 	// navigates to the beginning of the list
 	public void First()
 	{
+		curr.setLink(head.getLink());
 	}
 
 	// navigates to the end of the list
 	// the end of the list is at the last valid item in the list
 	public void Last()
 	{
+		curr.setLink(tail.getLink());
 	}
 
 	// navigates to the specified element (0-index)
@@ -87,6 +90,12 @@ class List
 	// there should be no wrap-around
 	public void Prev()
 	{
+		temp.setLink(head.getLink());
+		while (temp.getLink() != curr.getLink())
+		{
+			temp.setLink(temp.getLink());
+		}
+		curr.setLink(temp.getLink());
 	}
 
 	// navigates to the next element
@@ -94,18 +103,30 @@ class List
 	// there should be no wrap-around
 	public void Next()
 	{
+		curr.setLink(curr.getLink());
 	}
 
 	// returns the location of the current element (or -1)
 	public int GetPos()
 	{
-    return 0;
+		int n = 0;
+		temp.setLink(head.getLink());
+		do
+		{
+			temp.setLink(temp.getLink());
+			n++;
+		}
+		while (temp.getLink() != curr.getLink());
+    return n;
 	}
 
 	// returns the value of the current element (or -1)
 	public int GetValue()
 	{
-    return 0;
+		if (List.IsEmpty())
+			return -1;
+		else
+		  return curr.getData();
 	}
 
 	// returns the size of the list
@@ -144,7 +165,10 @@ class List
 	// returns if the list is empty
 	public boolean IsEmpty()
 	{
-    return true;
+		if (head.getLink() == null)
+    	return true;
+		else
+			return false;
 	}
 
 	// returns if the list is full
@@ -173,6 +197,6 @@ class List
 	// the string "NULL" should be returned for an empty list
 	public String toString()
 	{
-    return null;
+    	return null;
 	}
 }
