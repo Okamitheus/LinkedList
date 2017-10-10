@@ -57,6 +57,15 @@ class List
 	// remember that an empty list has a "size" of -1 and its "position" is at -1
 	public List()
 	{
+		Scanner Constructor = new Scanner(System.in);
+		curr.getLink() = head.getLink();
+		while (Constructor.hasNextInt())
+		{
+				Node temp = new Node();
+				temp.setLink(curr.getLink());
+				temp.setData(Constructor.nextInt());
+				curr.setLink(curr.getLink());
+		}
 	}
 
 	// copy constructor
