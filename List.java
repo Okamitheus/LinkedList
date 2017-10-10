@@ -1,9 +1,9 @@
-/* ***************************************************
- * John Spurgeon
- * 10/2/17
- * List.java
+
+ * <your name>
+ * <the date>
+ * <the file name>
  *
- * description
+ * <a simple, short program/class description>
  *************************************************** */
 
 // the Node class
@@ -43,48 +43,44 @@ class Node
 }
 
 // the List class
-class List
+public class List
 {
 	public static final int MAX_SIZE = 50;
 
 	private Node head;
 	private Node tail;
 	private Node curr;
-	private Node temp;
 	private int num_items;
 
 	// constructor
 	// remember that an empty list has a "size" of -1 and its "position" is at -1
 	public List()
 	{
-		Scanner Constructor = new Scanner(System.in);
-		curr.getLink() = head.getLink();
-		while (Constructor.hasNextInt())
-		{
-				Node temp = new Node();
-				temp.setLink(curr.getLink());
-				temp.setData(Constructor.nextInt());
-				curr.setLink(curr.getLink());
-		}
+		head = new Node();
+		tail = head;
+		curr = head;
+		curr.setData(-1);
 	}
 
 	// copy constructor
 	// clones the list l and sets the last element as the current
 	public List(List l)
 	{
+
 	}
 
 	// navigates to the beginning of the list
 	public void First()
 	{
-		curr.setLink(head.getLink());
+		if(!IsEmpty())
+			curr = head;
 	}
 
 	// navigates to the end of the list
 	// the end of the list is at the last valid item in the list
 	public void Last()
 	{
-		curr.setLink(tail.getLink());
+		curr = tail;
 	}
 
 	// navigates to the specified element (0-index)
@@ -99,12 +95,6 @@ class List
 	// there should be no wrap-around
 	public void Prev()
 	{
-		temp.setLink(head.getLink());
-		while (temp.getLink() != curr.getLink())
-		{
-			temp.setLink(temp.getLink());
-		}
-		curr.setLink(temp.getLink());
 	}
 
 	// navigates to the next element
@@ -112,37 +102,30 @@ class List
 	// there should be no wrap-around
 	public void Next()
 	{
-		curr.setLink(curr.getLink());
+		if(!IsEmpty() && curr.getData() != tail.getData())
+			curr = curr.getLink();
 	}
 
 	// returns the location of the current element (or -1)
 	public int GetPos()
 	{
-		int n = 0;
-		temp.setLink(head.getLink());
-		do
-		{
-			temp.setLink(temp.getLink());
-			n++;
-		}
-		while (temp.getLink() != curr.getLink());
-    return n;
+		return -1;
 	}
 
 	// returns the value of the current element (or -1)
 	public int GetValue()
 	{
-		if (List.IsEmpty())
+		if(IsEmpty())
 			return -1;
 		else
-		  return curr.getData();
+			return curr.getData();
 	}
 
 	// returns the size of the list
 	// size does not imply capacity
 	public int GetSize()
 	{
-    return 0;
+		return num_items;
 	}
 
 	// inserts an item before the current element
@@ -150,6 +133,26 @@ class List
 	// this should not be possible for a full list
 	public void InsertBefore(int data)
 	{
+		if(IsEmpty())
+		{
+			tail.getLink() = new Node();
+			curr = tail.getLink();
+			tail = tail.getLink();
+			curr.setData(data);
+			num_items++;
+		}
+		else
+		{
+			if(!IsFull())
+			{
+				for (int i = num_items; i >= curr; i--)
+					bleh
+				curr.setData(data);
+				tail.getLink() = new Node();
+				tail = tail.getLink();
+				num_items++;
+			}
+		}
 	}
 
 	// inserts an item after the current element
@@ -157,6 +160,23 @@ class List
 	// this should not be possible for a full list
 	public void InsertAfter(int data)
 	{
+		if(!IsFull())
+		{
+			if (curr.getData() == tail.getData())
+			{
+				tail.setLink(new Node());
+				curr = tail.getLink();
+				tail = tail.getLink();
+				curr.setData(data);
+				num_items++;
+			}
+			else
+			{
+				Next();
+				InsertBefore(data);
+				num_items++;
+			}
+		}
 	}
 
 	// removes the current element (collapsing the list)
@@ -169,27 +189,41 @@ class List
 	// this should not be possible for an empty list
 	public void Replace(int data)
 	{
+		if(!IsEmpty())
+			curr.setData(data);
 	}
 
 	// returns if the list is empty
 	public boolean IsEmpty()
 	{
-		if (head.getLink() == null)
-    	return true;
-		else
-			return false;
+		if (tail.getData() == -1)
+			return true;
+		return false;
 	}
 
 	// returns if the list is full
 	public boolean IsFull()
 	{
-    return true;
+		return (num_items >= MAX_SIZE - 1);
 	}
 
 	// returns if two lists are equal (by value)
 	public boolean Equals(List l)
 	{
-    return true;
+		if (num_items != l.num_items)
+			return false;
+
+		curr = head;
+		l.curr = l.head;
+		for(int i = 0; i < GetSize(); i++)
+		{
+			if(curr != l.curr)
+				return false;
+			curr = curr.getLink();
+			l.curr = l.curr.getLink();
+		}
+
+		return true;
 	}
 
 	// returns the concatenation of two lists
@@ -199,13 +233,24 @@ class List
 	// the last element of the new list is the current
 	public List Add(List l)
 	{
-    return null;
+		List m = new List(this);
+		return m;
 	}
 
 	// returns a string representation of the entire list (e.g., 1 2 3 4 5)
 	// the string "NULL" should be returned for an empty list
 	public String toString()
 	{
-    	return null;
+		if(IsEmpty())
+			return "NULL";
+		else
+		{
+			String s = "";
+			curr = head;
+			for(int i = 0; i < GetSize(); i++)
+				s += (curr.getData() + " ");
+				curr = curr.getLink();
+			return s;
+		}
 	}
 }
